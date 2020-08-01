@@ -35,4 +35,4 @@ async def div(ctx,*args: int):
 
 
         
-client.run("NDMxMjk1MzQxNTMxNDk2NDQ4.WsWZFg.aYv-vk483AWIE7x4KrT8kMg3lzo")
+client.run("")
