@@ -36,6 +36,13 @@ async def div(ctx,*args: int):
     
 @client.command()
 async def cal(ctx,*args):
+    data = []
+    for i in args:
+        temp = i.split('+')
+    await ctx.send(temp)
+    
+    
+    
     temp = 0
     for index, x in enumerate(args):
     	if (x == '+'):
