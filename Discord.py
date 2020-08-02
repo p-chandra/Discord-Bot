@@ -33,6 +33,27 @@ async def mul(ctx,*args: int):
 async def div(ctx,*args: int):
     await ctx.send(sum(args))
 
+    
+@client.command()
+async def cal(ctx,*args):
+    temp = 0
+    for index, x in enumerate(args):
+    	if (x == '+'):
+    	    temp = int(args[index-1]) + int(args[index+1])
+    	
+    	elif (x == '-'):
+    	    temp = int(args[index-1]) - int(args[index+1])
+    	
+    	elif(x == '*'):
+    	    temp = int(args[index-1]) * int(args[index+1])
+    	
+    	elif(x == '/' and args[index+1] != '0'):
+    	    temp = int(args[index-1]) / int(args[index+1])
+    
+    	else:
+    	    await ctx.send("Invalid Data Entry")
+    	    break
+    await ctx.send(temp)
 
         
 client.run("")
