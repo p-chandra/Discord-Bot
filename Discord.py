@@ -62,5 +62,27 @@ async def cal(ctx,*args):
     	    break
     await ctx.send(temp)
 
+   @client.command()
+async def space(ctx,*args):
+    queue = []
+    final = []
+    i = 0
+    temp = ""
+    for index, x in enumerate(args):
+        if(index % 2 == 0):
+            queue.append(x)
+        else:
+            queue.append(x)
+    while i < len(queue):
+        if (queue[i] == '+'):
+            temp = queue.pop([i-1]) + queue.pop([i+1])
+            #del queue[i-1]
+            #del queue[i-1]
+            #del queue[i-1]
+            queue.insert(0,temp)
+        i += 1
+    await ctx.send(queue)
+
+        
         
 client.run("")
