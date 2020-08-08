@@ -33,23 +33,39 @@ async def mul(ctx,*args: int):
 async def div(ctx,*args: int):
     await ctx.send(sum(args))
 
+#!cal 1 + 3 * 6 / 7
+#make sure to use space after each input
 @client.command()
 async def cal(ctx,*args):
     data = list(args)
     if (len(data) % 2 != 1):
         await ctx.send("Invalid Number of Arguments")
     else:
-        for x in data:
+        while '*' in data or '/' in data:
+          for x in data:
             if (x == '*'):
                 index = data.index('*')
                 temp = float(data.pop(index-1)) * float(data.pop(index))
                 data.remove('*')
                 data.insert(index-1,temp)
-            elif (x == '+'):
+            if (x == '/'):
+                index = data.index('/')
+                temp = float(data.pop(index-1)) / float(data.pop(index))
+                data.remove('/')
+                data.insert(index-1,temp)
+        while '+' in data or '-' in data:
+          for x in data:
+            if (x == '+'):
                 index = data.index('+')
                 temp = float(data.pop(index-1)) + float(data.pop(index))
                 data.remove('+')
                 data.insert(index-1,temp)
-            await ctx.send(data)
+            if (x == '-'):
+                index = data.index('-')
+                temp = float(data.pop(index-1)) - float(data.pop(index))
+                data.remove('-')
+                data.insert(index-1,temp)
+        await ctx.send(data)
+
        
 client.run("")
