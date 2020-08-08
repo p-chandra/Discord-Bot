@@ -13,25 +13,16 @@ async def on_ready():
 @client.command()
 async def hello(ctx,*args):
     await ctx.send('{} arguments: {}'.format(len(args), ', '.join(args)))
+
     
 @client.command()
-async def add(ctx,*args: int):
-    await ctx.send(sum(args))
-
-@client.command()
-async def sub(ctx,*args: int):
-    temp = 0
+async def ascii(ctx,*args):
     for i in args:
-        temp = i - temp
-    await ctx.send(temp)
+        if (len(i) >= 2):
+            await ctx.send("Invalid Input: Check Spaces")
+        else:
+            await ctx.send('\'{}\' = {}'.format(i,ord(i)))
 
-@client.command()
-async def mul(ctx,*args: int):
-    await ctx.send(sum(args))
-
-@client.command()
-async def div(ctx,*args: int):
-    await ctx.send(sum(args))
 
 #!cal 1 + 3 * 6 / 7
 #make sure to use space after each input
@@ -65,7 +56,7 @@ async def cal(ctx,*args):
                 temp = float(data.pop(index-1)) - float(data.pop(index))
                 data.remove('-')
                 data.insert(index-1,temp)
-        await ctx.send(data)
+        await ctx.send(data[0])
 
        
 client.run("")
