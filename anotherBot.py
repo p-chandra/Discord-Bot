@@ -12,9 +12,8 @@ async def on_ready():
 #Getting the messagers username.
 @client.command()
 async def hello(ctx):
-    username = ctx.message.author.name
+    username = ctx.message.author.display_name #or ctx...author.user for no nickname name
     await ctx.send(f'Hello, {username}')
-#username = ctx.message.author.display_name  this will display the nickname and default to username if not found
 
 
 #Reading from a file.
@@ -23,18 +22,21 @@ rules = f.readlines()
 with open('rules.txt') as f:
    count = sum(1 for _ in f)
 
+
 @client.command(aliases=['rules'])
 async def rule(ctx,*,number):
-    if (number.isnumeric() and int(number) < 6):
-        await ctx.send(rules[int(number)-1])
+    #check if number is a numeric value.
+    if (number.isnumeric()):
+        if (int(number) < count+1):
+            await ctx.send(rules[int(number)-1])
+        else:
+            await ctx.send(f'There is no rule {number}. So far there are only 5 rules. If you would like to add a rule, let me know')
+    #the number argument is a string so check to if string equals "all".
     elif ((number) == "all"):
         for x in range(count):
             await ctx.send(rules[x])
-    elif (number.isnumeric() and int(number) > 6):
-        await ctx.send(f'There is no rule {number}. So far there are only 5 rules. If you would like to add a rule, let me know.')
     else:
         await ctx.send('I see you are trying to test my code... stop it.')
-
 
 
 #Counting the arguments.
@@ -51,6 +53,5 @@ async def arg(ctx,*args):
 #    if message.author == user:
 #        if message.content == 'PASSCODE':
 #            await message.channel.send('RESPOND')
-
 
 client.run("")
